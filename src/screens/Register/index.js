@@ -3,7 +3,6 @@ import { useDispatch } from 'react-redux';
 import { useForm } from "react-hook-form";
 import useAxios from 'axios-hooks';
 
-import { userDetails } from '../../redux/slices/persistedSlice';
 import { Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import { registerUserConfig } from '../../utils/api';
@@ -22,7 +21,6 @@ const SignUp = () => {
 
     useEffect(() => {
         if (response) {
-            dispatch(userDetails(response));
             history.push('/login')
         }
     }, [response])
@@ -41,8 +39,11 @@ const SignUp = () => {
                 style={{ display: "flex", flexDirection: 'column', justifyContent: "center", alignItems: 'center' }}
                 onSubmit={handleSubmit(onSubmit)}>
                 <div>Register</div>
-                <input className="input" {...register("email")} />
-                <input className="input" {...register("password")} />
+                <input placeholder="Email" className="input" {...register("email")} />
+                <input placeholder="Name" className="input" {...register("name")} />
+                <input placeholder="lastname" className="input" {...register("lastname")} />
+                <input placeholder="Phone" className="input" {...register("phone")} />
+                <input placeholder="Password" className="input" {...register("password")} />
                 <input className="button" type="submit" />
                 <div style={{ fontSize: 12, margin: 10 }}>{registerError?.response?.data?.errorName}</div>
                 <Link to="/login">Login</Link>
